@@ -1,0 +1,904 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Through SAMBALPUR - Peace| Tranquility| Beautiful</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #9a9adb;
+            overflow-x: hidden;
+            color: #842d2d;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: rgb(127, 97, 125);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(154, 154, 214, 0.7), 
+                rgba(201, 136, 238, 0.6), 
+                rgba(121, 112, 90, 0.5));
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            color: #d4af37;
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #e8ddc0;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1s forwards;
+        }
+
+        .start-journey {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #8b4513, #d4af37);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1.5s forwards;
+        }
+
+        .start-journey:hover {
+            background: linear-gradient(135deg, #d4af37, #8b4513);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .journey-container {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(to bottom, 
+                #1a1a2e 0%, 
+                #16213e 25%, 
+                #0f3460 50%, 
+                #533483 75%, 
+                #8b4513 100%);
+            min-height: 800vh;
+        }
+
+        .car {
+            position: fixed;
+            width: 120px;
+            height: 60px;
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+            display: none;
+        }
+
+        .car-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff4757, #ff3838, #ff6348);
+            border-radius: 15px 15px 8px 8px;
+            position: relative;
+            animation: carBounce 2s ease-in-out infinite;
+            box-shadow: inset 0 2px 10px rgba(255,255,255,0.3);
+        }
+
+        @keyframes carBounce {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-4px) scale(1.02); }
+        }
+
+        .car-body::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 30px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 8px;
+            top: 8px;
+            left: 15px;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.3);
+        }
+
+        .car-body::after {
+            content: '🚗';
+            position: absolute;
+            font-size: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .wheel {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: radial-gradient(circle, #2d3436, #636e72);
+            border-radius: 50%;
+            bottom: -11px;
+            animation: wheelSpin 0.8s linear infinite;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .wheel::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wheel.front { right: 15px; }
+        .wheel.back { left: 15px; }
+
+        @keyframes wheelSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .place {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 120px 60px;
+            margin: 50px 0;
+        }
+
+        .place:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .place-content {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 60px;
+            opacity: 0;
+            transform: translateY(80px) scale(0.8);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+        }
+
+        .place-content.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .place-image {
+            width: 450px;
+            height: 350px;
+            border-radius: 25px;
+            object-fit: cover;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+            border: 5px solid rgba(255,255,255,0.2);
+        }
+
+        .place-image:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.5);
+        }
+
+        .place-title {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.6);
+            background: linear-gradient(45deg, #462f2f, #2c3637);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes titleShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .place-description {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.95);
+            line-height: 1.8;
+            background: rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .place-highlights {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .highlight-tag {
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+            font-weight: bold;
+            animation: tagPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes tagPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.15;
+            animation: float 25s linear infinite;
+            font-size: 2.5rem;
+        }
+
+        @keyframes float {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0.5); 
+                opacity: 0;
+            }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { 
+                transform: translateY(-100px) rotate(360deg) scale(1.2); 
+                opacity: 0;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            background: rgba(0,0,0,0.2);
+            padding: 15px 8px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            width: 6px;
+            height: 250px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 100%;
+            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 3px;
+            transition: height 0.3s ease;
+            height: 0%;
+            box-shadow: 0 0 20px rgba(255,107,107,0.5);
+        }
+
+        .weather-widget {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            backdrop-filter: blur(10px);
+            z-index: 50;
+            animation: widgetFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes widgetFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .fun-facts {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            max-width: 300px;
+            z-index: 50;
+            transform: translateX(-120%);
+            transition: transform 0.5s ease;
+        }
+
+        .fun-facts.show {
+            transform: translateX(0);
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.3rem; }
+            .place { 
+                padding: 60px 25px; 
+                flex-direction: column !important; 
+                min-height: 80vh;
+            }
+            .place-content { margin: 25px 0; max-width: 100%; }
+            .place-image { width: 320px; height: 240px; }
+            .place-title { font-size: 2.2rem; }
+            .place-description { font-size: 1rem; padding: 20px; }
+            .car { width: 80px; height: 40px; }
+            .scroll-indicator { right: 15px; }
+            .weather-widget, .fun-facts { 
+                position: relative; 
+                margin: 10px; 
+                transform: none !important; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"><div class="particle" style="left: 43.9612%; animation-delay: 7.62772s; animation-duration: 10.0314s;"></div><div class="particle" style="left: 28.0407%; animation-delay: 6.18815s; animation-duration: 17.0838s;"></div><div class="particle" style="left: 42.4759%; animation-delay: 8.63386s; animation-duration: 18.2212s;"></div><div class="particle" style="left: 48.7319%; animation-delay: 11.0581s; animation-duration: 15.4977s;"></div><div class="particle" style="left: 91.9883%; animation-delay: 14.0193s; animation-duration: 12.0597s;"></div><div class="particle" style="left: 88.319%; animation-delay: 0.759106s; animation-duration: 17.27s;"></div><div class="particle" style="left: 52.214%; animation-delay: 4.9669s; animation-duration: 19.8444s;"></div><div class="particle" style="left: 59.513%; animation-delay: 1.70887s; animation-duration: 13.3929s;"></div><div class="particle" style="left: 84.1591%; animation-delay: 9.64523s; animation-duration: 11.1268s;"></div><div class="particle" style="left: 29.7411%; animation-delay: 10.9372s; animation-duration: 15.9073s;"></div><div class="particle" style="left: 39.0106%; animation-delay: 11.7121s; animation-duration: 10.5492s;"></div><div class="particle" style="left: 95.0797%; animation-delay: 13.5298s; animation-duration: 12.1845s;"></div><div class="particle" style="left: 6.29935%; animation-delay: 1.51643s; animation-duration: 13.0907s;"></div><div class="particle" style="left: 3.30369%; animation-delay: 9.28184s; animation-duration: 16.2374s;"></div><div class="particle" style="left: 61.9233%; animation-delay: 12.2078s; animation-duration: 16.2963s;"></div><div class="particle" style="left: 9.8842%; animation-delay: 6.56102s; animation-duration: 13.144s;"></div><div class="particle" style="left: 31.954%; animation-delay: 7.03409s; animation-duration: 10.1113s;"></div><div class="particle" style="left: 25.3305%; animation-delay: 11.0189s; animation-duration: 18.2698s;"></div><div class="particle" style="left: 17.2381%; animation-delay: 14.3329s; animation-duration: 12.6354s;"></div><div class="particle" style="left: 67.288%; animation-delay: 10.7881s; animation-duration: 19.7619s;"></div><div class="particle" style="left: 10.6273%; animation-delay: 12.8085s; animation-duration: 12.6259s;"></div><div class="particle" style="left: 94.3131%; animation-delay: 11.2055s; animation-duration: 12.6727s;"></div><div class="particle" style="left: 10.3387%; animation-delay: 2.94487s; animation-duration: 12.3773s;"></div><div class="particle" style="left: 8.0293%; animation-delay: 6.06737s; animation-duration: 16.8878s;"></div><div class="particle" style="left: 23.6829%; animation-delay: 9.7341s; animation-duration: 19.0717s;"></div><div class="particle" style="left: 79.7067%; animation-delay: 14.2638s; animation-duration: 14.9329s;"></div><div class="particle" style="left: 2.36576%; animation-delay: 2.62081s; animation-duration: 15.756s;"></div><div class="particle" style="left: 10.9195%; animation-delay: 8.18846s; animation-duration: 12.6604s;"></div><div class="particle" style="left: 0.85803%; animation-delay: 10.2991s; animation-duration: 15.3819s;"></div><div class="particle" style="left: 44.642%; animation-delay: 5.42011s; animation-duration: 16.9686s;"></div><div class="particle" style="left: 0.58447%; animation-delay: 4.72533s; animation-duration: 16.0452s;"></div><div class="particle" style="left: 55.1604%; animation-delay: 12.661s; animation-duration: 16.3124s;"></div><div class="particle" style="left: 82.6529%; animation-delay: 7.82475s; animation-duration: 14.0044s;"></div><div class="particle" style="left: 91.0946%; animation-delay: 1.12149s; animation-duration: 10.9638s;"></div><div class="particle" style="left: 95.8329%; animation-delay: 4.8425s; animation-duration: 14.6464s;"></div><div class="particle" style="left: 57.8271%; animation-delay: 5.31976s; animation-duration: 10.6003s;"></div><div class="particle" style="left: 61.0873%; animation-delay: 1.47361s; animation-duration: 19.9952s;"></div><div class="particle" style="left: 96.5663%; animation-delay: 13.0739s; animation-duration: 11.1777s;"></div><div class="particle" style="left: 82.5331%; animation-delay: 9.30088s; animation-duration: 13.267s;"></div><div class="particle" style="left: 97.9785%; animation-delay: 2.74116s; animation-duration: 12.1451s;"></div><div class="particle" style="left: 58.8156%; animation-delay: 12.6536s; animation-duration: 17.9328s;"></div><div class="particle" style="left: 23.9319%; animation-delay: 7.23889s; animation-duration: 19.8523s;"></div><div class="particle" style="left: 5.03491%; animation-delay: 8.11062s; animation-duration: 17.714s;"></div><div class="particle" style="left: 2.13982%; animation-delay: 12.4025s; animation-duration: 12.3509s;"></div><div class="particle" style="left: 96.3797%; animation-delay: 3.57303s; animation-duration: 18.5724s;"></div><div class="particle" style="left: 66.4087%; animation-delay: 2.98065s; animation-duration: 15.1023s;"></div><div class="particle" style="left: 56.2853%; animation-delay: 13.0401s; animation-duration: 16.0175s;"></div><div class="particle" style="left: 58.0723%; animation-delay: 12.8541s; animation-duration: 17.5619s;"></div><div class="particle" style="left: 3.69079%; animation-delay: 5.72951s; animation-duration: 19.0139s;"></div><div class="particle" style="left: 6.14775%; animation-delay: 1.28546s; animation-duration: 15.9584s;"></div></div>
+
+    <div class="weather-widget">
+        <div style="font-weight: bold; margin-bottom: 5px;">🌤️ SAMBALPUR Today</div>
+        <div style="font-size: 0.9rem;">Perfect day to explore!</div>
+    </div>
+
+    <div class="hero-section">
+        <video class="hero-video" autoplay="" muted="" loop="" playsinline="">
+            <source src="hero.mp4" type="video/mp4">
+            <!-- Fallback for browsers that don't support video -->
+            <div style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4); width: 100%; height: 100%;"></div>
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <h1 class="hero-title">Welcome to SAMBALPUR</h1>
+        <p class="hero-subtitle">Peace| Tranquility| Beautiful</p>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">The Handloom City</p>
+        <button class="start-journey" onclick="startJourney()">🚗 Begin Your Journey</button>
+    </div>
+
+    <div class="journey-container">
+        
+        <div class="car" id="car" style="display: none;">
+            <div class="car-body">
+                <div class="wheel front"></div>
+                <div class="wheel back"></div>
+            </div>
+        </div>
+
+        <div class="place" data-side="right">
+            <div class="place-content">
+                <h2 class="place-title">The Samaleswari Temple</h2>
+                <p class="place-description">
+                    The crown jewel of Bhubaneswar, this magnificent 11th-century temple dedicated to Lord Shiva stands as a masterpiece of Kalinga architecture. With its towering spire reaching 180 feet into the sky, it represents the pinnacle of Odishan temple building artistry and remains one of the most sacred pilgrimage sites in eastern India.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">📿 Sacred Pilgrimage</span>
+                    <span class="highlight-tag">🏗️ Kalinga Architecture</span>
+                    <span class="highlight-tag">⭐ 1000+ Years Old</span>
+                </div>
+            </div>
+            <img src="lingaraj.jpg" alt="Lingaraj Temple" class="place-image">
+        </div>
+
+        <div class="place" data-side="left">
+            <div class="place-content">
+                <h2 class="place-title">🎭 Jagannath Temple (Puri)</h2>
+                <p class="place-description">
+                    Just a scenic 60km drive from Bhubaneswar, the sacred Jagannath Temple in Puri is one of India's most revered Char Dham pilgrimage sites. Home to the world-famous Rath Yatra festival, this 12th-century architectural marvel attracts millions of devotees who come to seek blessings from Lord Jagannath, Balabhadra, and Subhadra.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">🎪 Rath Yatra Festival</span>
+                    <span class="highlight-tag">🌊 Near Beach</span>
+                    <span class="highlight-tag">🕉️ Char Dham</span>
+                </div>
+            </div>
+            <img src="jaganath-temple.jpg" alt="Jagannath Temple" class="place-image">
+        </div>
+
+        <div class="place" data-side="right">
+            <div class="place-content">
+                <h2 class="place-title">☀️ Konark Sun Temple</h2>
+                <p class="place-description">
+                    A UNESCO World Heritage Site and one of India's most iconic monuments, this breathtaking 13th-century architectural marvel is designed as a colossal chariot with 24 intricately carved stone wheels. Dedicated to the Sun God Surya, the temple showcases the absolute zenith of Kalinga architecture and stands as an eternal testament to ancient Indian engineering prowess.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">🏆 UNESCO Heritage</span>
+                    <span class="highlight-tag">🎨 Stone Chariot</span>
+                    <span class="highlight-tag">☀️ Sun Temple</span>
+                </div>
+            </div>
+            <img src="konark.jpg" alt="Konark Sun Temple" class="place-image">
+        </div>
+
+        <div class="place" data-side="left">
+            <div class="place-content">
+                <h2 class="place-title">🗿 Udayagiri &amp; Khandagiri Caves</h2>
+                <p class="place-description">
+                    These ancient Jain rock-cut caves dating back to the 2nd century BCE offer a fascinating glimpse into India's rich monastic tradition. Carved into twin hills with incredible precision, these caves served as peaceful residences for Jain monks and feature beautiful sculptures and inscriptions that narrate captivating stories of the ancient Kalinga kingdom.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">🏛️ Ancient Caves</span>
+                    <span class="highlight-tag">☸️ Jain Heritage</span>
+                    <span class="highlight-tag">📜 Historical Inscriptions</span>
+                </div>
+            </div>
+            <img src="khandagiri.jpg" alt="Udayagiri Caves" class="place-image">
+        </div>
+
+
+        <div class="place" data-side="left">
+            <div class="place-content">
+                <h2 class="place-title">☮️ Dhauli Peace Pagoda</h2>
+                <p class="place-description">
+                    Built on the historic site of the legendary Kalinga War, this beautiful white peace pagoda symbolizes Emperor Ashoka's profound transformation from conquest to Buddhism. The site offers breathtaking panoramic views of the meandering Daya River and serves as a powerful reminder of the triumph of peace and non-violence in human history.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">☮️ Peace Symbol</span>
+                    <span class="highlight-tag">👑 Ashoka's Legacy</span>
+                    <span class="highlight-tag">🌅 River Views</span>
+                </div>
+            </div>
+            <img src="dhauli.jpg" alt="Dhauli Peace Pagoda" class="place-image">
+        </div>
+
+        <div class="place" data-side="right">
+            <div class="place-content">
+                <h2 class="place-title">🐅 Nandankanan Zoo</h2>
+                <p class="place-description">
+                    One of India's premier zoological parks and botanical gardens, Nandankanan is world-famous for its white tiger safari and incredibly successful conservation breeding programs. Set amidst the lush green Chandaka forest, it houses over 1600 animals of 166 species and provides visitors with an excellent opportunity to experience Odisha's incredible biodiversity.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">🐅 White Tigers</span>
+                    <span class="highlight-tag">🌳 Forest Setting</span>
+                    <span class="highlight-tag">🦎 1600+ Animals</span>
+                </div>
+            </div>
+            <img src="nandankanan.jpg" alt="Nandankanan Zoo" class="place-image">
+        </div>
+
+        <div class="place" data-side="left">
+            <div class="place-content">
+                <h2 class="place-title">🏢 Modern Bhubaneswar</h2>
+                <p class="place-description">
+                    Today's Bhubaneswar beautifully blends its ancient heritage with cutting-edge modern development. As the dynamic capital of Odisha, it's rapidly emerging as a major IT and education hub while carefully preserving its rich cultural roots. The well-planned city layout, prestigious educational institutions, and thriving tech industry make it a perfect example of India's remarkable urban evolution.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">💻 IT Hub</span>
+                    <span class="highlight-tag">🎓 Education Center</span>
+                    <span class="highlight-tag">🌆 Smart City</span>
+                </div>
+            </div>
+            <img src="morden.webp" alt="Modern Bhubaneswar" class="place-image">
+        </div>
+
+        <div class="place" data-side="right">
+            <div class="place-content">
+                <h2 class="place-title">🍛 Odia Cuisine Paradise</h2>
+                <p class="place-description">
+                    Experience the divine flavors of authentic Odia cuisine! From the world-famous Pakhala Bhata (fermented rice) to sweet delicacies like Rasgulla and Chhena Poda, Bhubaneswar offers a gastronomic journey like no other. Don't miss the traditional thali at local restaurants or the street food at Unit-1 Market and Khandagiri Square.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">🍚 Pakhala Bhata</span>
+                    <span class="highlight-tag">🍮 Rasgulla Origin</span>
+                    <span class="highlight-tag">🥘 Traditional Thali</span>
+                    <span class="highlight-tag"> Chaul Bara</span>
+    
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="Odia Cuisine" class="place-image">
+        </div>
+
+        <div class="place" data-side="left">
+            <div class="place-content">
+                <h2 class="place-title">🎭 Cultural Heritage</h2>
+                <p class="place-description">
+                    Bhubaneswar is the beating heart of Odisha's vibrant cultural scene. Experience mesmerizing Odissi dance performances, witness colorful festivals like Durga Puja and Kali Puja, and explore traditional handicrafts like Pattachitra paintings and stone carvings. The city hosts numerous cultural events throughout the year, celebrating its rich artistic legacy.
+                </p>
+                <div class="place-highlights">
+                    <span class="highlight-tag">💃 Odissi Dance</span>
+                    <span class="highlight-tag">🎨 Pattachitra Art</span>
+                    <span class="highlight-tag">🎪 Festivals</span>
+                </div>
+            </div>
+            <img src="cultural.png" alt="Cultural Heritage" class="place-image">
+        </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <div class="fun-facts" id="funFacts">
+        <div style="font-weight: bold; margin-bottom: 8px;">🤔 Did You Know?</div>
+        <div id="factText" style="font-size: 0.9rem;">Bhubaneswar has over 500 temples! 🏛️</div>
+    </div>
+
+    <div class="floating-elements">
+        <div class="floating-element" style="left: 10%; animation-delay: 0s;">🏛️</div>
+        <div class="floating-element" style="left: 20%; animation-delay: 5s;">🌺</div>
+        <div class="floating-element" style="left: 70%; animation-delay: 10s;">🕉️</div>
+        <div class="floating-element" style="left: 80%; animation-delay: 15s;">🎭</div>
+        <div class="floating-element" style="left: 30%; animation-delay: 8s;">🦚</div>
+        <div class="floating-element" style="left: 60%; animation-delay: 12s;">🌸</div>
+        <div class="floating-element" style="left: 45%; animation-delay: 18s;">🐅</div>
+        <div class="floating-element" style="left: 85%; animation-delay: 3s;">☀️</div>
+        <div class="floating-element" style="left: 15%; animation-delay: 22s;">🍛</div>
+        <div class="floating-element" style="left: 75%; animation-delay: 7s;">💕</div>
+    </div>
+
+    <script>
+        const car = document.getElementById('car');
+        const progressFill = document.getElementById('progressFill');
+        const places = document.querySelectorAll('.place');
+        const journeyContainer = document.querySelector('.journey-container');
+        const funFacts = document.getElementById('funFacts');
+        const factText = document.getElementById('factText');
+        
+        let currentDirection = 1;
+        let lastScrollY = 0;
+
+        // Fun facts about Bhubaneswar
+        const facts = [
+            "Bhubaneswar has over 500 temples! 🏛️",
+            "It's called the 'Temple City of India' 🕉️",
+            "The city is over 3000 years old! ⏳",
+            "Lingaraj Temple is 180 feet tall! 📏",
+            "Bhubaneswar means 'Lord of the Universe' 🌟",
+            "It's the capital of Odisha state 🏛️",
+            "Home to famous Odissi dance form 💃",
+            "Rasgulla was invented in Odisha! 🍮",
+            "The city has ancient cave temples 🗿",
+            "Modern planned city with IT hubs 💻"
+        ];
+
+        let currentFactIndex = 0;
+
+        // Create particles
+        function createParticles() {
+            const particleContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        function startJourney() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function updateCarPosition() {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const heroHeight = windowHeight;
+            
+            // Only show car after hero section
+            if (scrollY <= heroHeight * 0.8) {
+                car.style.display = 'none';
+                return;
+            }
+            
+            car.style.display = 'block';
+            
+            const journeyScrollY = scrollY - heroHeight;
+            const journeyHeight = journeyContainer.offsetHeight - windowHeight;
+            const progress = Math.min(Math.max(journeyScrollY / journeyHeight, 0), 1);
+            
+            // Update progress bar
+            progressFill.style.height = `${progress * 100}%`;
+            
+            // Calculate car position with enhanced curves
+            const windowWidth = window.innerWidth;
+            const centerX = windowWidth / 2;
+            const amplitude = Math.min(windowWidth * 0.4, 400);
+            
+            // Enhanced curve system for more natural movement
+            const totalCurves = 6;
+            const curveProgress = progress * totalCurves;
+            const currentCurve = Math.floor(curveProgress);
+            const curvePosition = curveProgress - currentCurve;
+            
+            // Create different curve types for variety
+            let xOffset;
+            if (currentCurve % 3 === 0) {
+                xOffset = Math.sin(curvePosition * Math.PI) * amplitude;
+            } else if (currentCurve % 3 === 1) {
+                xOffset = Math.cos(curvePosition * Math.PI) * amplitude * 0.8;
+            } else {
+                xOffset = Math.sin(curvePosition * Math.PI * 2) * amplitude * 0.6;
+            }
+            
+            const carX = centerX + xOffset - 60;
+            const carY = heroHeight + (journeyScrollY * 0.9);
+            
+            // Enhanced car rotation and direction
+            const derivative = Math.cos(curvePosition * Math.PI) * totalCurves;
+            const rotationAmount = Math.atan(derivative / 10) * (180 / Math.PI);
+            
+            let scaleX = 1;
+            if (Math.abs(derivative) > 0.5) {
+                scaleX = derivative > 0 ? 1 : -1;
+            }
+            
+            // Smooth car movement with enhanced effects
+            car.style.transform = `translate(${carX}px, ${carY}px) scaleX(${scaleX}) rotate(${rotationAmount * scaleX}deg)`;
+            
+            // Show/hide places with improved timing
+            places.forEach((place, index) => {
+                const placeTop = place.offsetTop;
+                const placeHeight = place.offsetHeight;
+                const placeCenter = placeTop + placeHeight / 2;
+                const carCenter = carY + 30;
+                
+                const content = place.querySelector('.place-content');
+                const distanceFromCar = Math.abs(carCenter - placeCenter);
+                const triggerDistance = windowHeight * 0.5;
+                
+                if (distanceFromCar < triggerDistance) {
+                    content.classList.add('visible');
+                    
+                    // Show fun facts when reaching certain places
+                    if (index % 3 === 0 && !funFacts.classList.contains('show')) {
+                        showFunFact();
+                    }
+                } else {
+                    content.classList.remove('visible');
+                }
+            });
+        }
+
+        function showFunFact() {
+            factText.textContent = facts[currentFactIndex];
+            funFacts.classList.add('show');
+            
+            setTimeout(() => {
+                funFacts.classList.remove('show');
+                currentFactIndex = (currentFactIndex + 1) % facts.length;
+            }, 4000);
+        }
+
+        // Optimized scroll handling
+        let ticking = false;
+        
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateCarPosition();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+
+        // Enhanced hover effects
+        places.forEach((place, index) => {
+            const image = place.querySelector('.place-image');
+            const content = place.querySelector('.place-content');
+            const title = place.querySelector('.place-title');
+            
+            place.addEventListener('mouseenter', () => {
+                image.style.transform = 'scale(1.08) rotate(3deg)';
+                content.style.transform = 'translateY(-8px) scale(1.02)';
+                title.style.textShadow = '0 0 30px rgba(255,255,255,0.8), 3px 3px 8px rgba(0,0,0,0.6)';
+            });
+            
+            place.addEventListener('mouseleave', () => {
+                image.style.transform = 'scale(1) rotate(0deg)';
+                content.style.transform = 'translateY(0) scale(1)';
+                title.style.textShadow = '3px 3px 8px rgba(0,0,0,0.6)';
+            });
+        });
+
+        // Enhanced car speed effects
+        let scrollTimeout;
+        let isScrolling = false;
+        
+        window.addEventListener('scroll', () => {
+            const carBody = car.querySelector('.car-body');
+            const wheels = car.querySelectorAll('.wheel');
+            
+            if (!isScrolling) {
+                isScrolling = true;
+                carBody.style.animation = 'carBounce 0.4s ease-in-out infinite';
+                wheels.forEach(wheel => {
+                    wheel.style.animation = 'wheelSpin 0.2s linear infinite';
+                });
+            }
+            
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+                carBody.style.animation = 'carBounce 2s ease-in-out infinite';
+                wheels.forEach(wheel => {
+                    wheel.style.animation = 'wheelSpin 0.8s linear infinite';
+                });
+            }, 150);
+        }, { passive: true });
+
+        // Initialize everything
+        window.addEventListener('load', () => {
+            createParticles();
+            updateCarPosition();
+            
+            // Show first fun fact after a delay
+            setTimeout(() => {
+                showFunFact();
+            }, 3000);
+        });
+
+        // Add scroll-to-top functionality
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // Add touch support for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe up - continue scrolling down
+                    window.scrollBy({ top: window.innerHeight * 0.3, behavior: 'smooth' });
+                } else {
+                    // Swipe down - scroll up
+                    window.scrollBy({ top: -window.innerHeight * 0.3, behavior: 'smooth' });
+                }
+            }
+        }
+
+        // Add intersection observer for better performance
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '50px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all place content for smoother animations
+        document.querySelectorAll('.place-content').forEach(content => {
+            observer.observe(content);
+        });
+    </script>
+
+</body></html>
