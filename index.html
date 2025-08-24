@@ -2,132 +2,620 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome to Sambalpur</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sambalpur Heritage - Cultural Capital of Odisha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(241, 243, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: fixed;
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Cultural Cards */
+        .culture-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .culture-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .huma{
+          height: 450px;
+          border-radius: 30px;
+          transition: all 0.3s ease;
+          transition: all 0.4s ease;  
+          cursor: pointer;
+        }
+
+        .huma:hover{
+          box-shadow: rgb(231, 187, 133);
+          transform: scale(1.1);
+          
+          
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 2000;
+            transition: transform 0.3s ease;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .popup.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Section Animations */
+        .section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        .bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5); /* semi-bright */
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float 18s infinite ease-in-out;
+  z-index: 0;
+}
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatUp linear forwards;
+  z-index: 0;
+}
+
+@keyframes floatUp {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  100% { transform: translate(var(--x-move), var(--y-move)) scale(1.5); opacity: 0; }
+}
+
+/* Mix of small, medium bubbles with different positions */
+.bubble:nth-child(1) { width: 30px; height: 30px; top: 10%; left: 15%; animation-delay: 0s; }
+.bubble:nth-child(2) { width: 50px; height: 50px; top: 30%; left: 70%; animation-delay: 3s; }
+.bubble:nth-child(3) { width: 20px; height: 20px; top: 60%; left: 25%; animation-delay: 6s; }
+.bubble:nth-child(4) { width: 70px; height: 70px; top: 80%; left: 50%; animation-delay: 9s; }
+.bubble:nth-child(5) { width: 40px; height: 40px; top: 40%; left: 85%; animation-delay: 12s; }
+.bubble:nth-child(6) { width: 25px; height: 25px; top: 20%; left: 40%; animation-delay: 15s; }
+.bubble:nth-child(7) { width: 60px; height: 60px; top: 70%; left: 10%; animation-delay: 18s; }
+.bubble:nth-child(8) { width: 35px; height: 35px; top: 50%; left: 60%; animation-delay: 21s; }
+
+/* Floating animation */
+@keyframes float {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  25%  { transform: translate(30px, -40px) scale(1.1); opacity: 0.5; }
+  50%  { transform: translate(-40px, -80px) scale(1.2); opacity: 0.4; }
+  75%  { transform: translate(40px, -120px) scale(1.1); opacity: 0.5; }
+  100% { transform: translate(-30px, -160px) scale(1.3); opacity: 0; }
+}
+/* Transparent bubbles everywhere else */
+.bubble-transparent {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatUp linear forwards;
+  z-index: 0;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+.bubble-transparent {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatUp linear forwards;
+  z-index: 0;
+
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.1));
+  border: 1px solid rgba(200, 200, 255, 0.4);
+  box-shadow: 0 0 10px rgba(180, 200, 255, 0.5),
+              inset 0 0 8px rgba(255,255,255,0.7);
+}
+
+
+
+    </style>
 </head>
-<body>
-  <div class="video-container">
-    <video autoplay muted loop class="bg-video">
-      <source src="sambalpur.mp4" type="video/mp4" />
-      Your browser does not support HTML5 video.
-    </video>
-    <div class="overlay">
-      <nav>
-        <ul>
-          <li onclick="showSection('home')" style="color:rgb(44, 157, 202); ">Home</li>
-          <li onclick="showSection('about')"style="color:rgb(44, 157, 202);">About</li>
-          <li onclick="showSection('history')"style="color:rgb(44, 157, 202);">History</li>
-          <li onclick="showSection('culture')"style="color:rgb(44, 157, 202);">Culture</li>
-        </ul>
-      </nav>
-      <h1 class="floating-text">Welcome to SAMBALPUR</h1>
-      <p style="font-size: 6.7 rem;  color: rgb(44, 157, 202); margin-bottom: 6rem; opacity: 0.9;">Peace| Tranquility| Beautiful</p>
-       <p style="font-size: 30px; color: rgb(44, 157, 202); margin-bottom: 25px; opacity: 0.9;">The Handloom City</p>
-    </div>
-  </div>
+<body class="min-h-screen">
+    <!-- Floating Decorations -->
+    <div class="floating-element" style="top: 20%; left: 5%; font-size: 2rem;">🎭</div>
+    <div class="floating-element" style="top: 40%; right: 5%; font-size: 2rem; animation-delay: 0.5s;">🪘</div>
+    <div class="floating-element" style="top: 70%; left: 10%; font-size: 2rem; animation-delay: 1s;">🎨</div>
+    <div class="floating-element" style="top: 30%; right: 15%; font-size: 2rem; animation-delay: 1.5s;">🏺</div>
+    <div class="floating-element" style="top: 80%; right: 8%; font-size: 2rem; animation-delay: 2s;">🌺</div>
 
-  <div id="content">
-    <section id="home" class="section">
-  <h2>Heritage of Sambalpur</h2>
-  Sambalpur, one of the oldest cities of Odisha, is a land steeped in history and tradition. Known for its famous Sambalpuri sarees with intricate hand-woven designs, the city reflects the rich craftsmanship passed down through generations. The region is home to ancient temples like the Maa Samaleswari Temple, which draws pilgrims from far and wide. Festivals such as Nuakhai celebrate the agrarian roots of the land, while folk dances and music keep age-old cultural expressions alive. With its blend of art, spirituality, and timeless customs, Sambalpur stands as a living testament to Odisha’s vibrant heritage.
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-purple-800">Sambalpur Heritage</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-purple-700 transition-colors">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-purple-700 transition-colors">About</a>
+                    <a href="#culture" class="text-gray-700 hover:text-purple-700 transition-colors">Culture</a>
+                    <a href="#heritage" class="text-gray-700 hover:text-purple-700 transition-colors">Heritage</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-purple-700 transition-colors">Gallery</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-purple-800 text-2xl">☰</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="absolute inset-0">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7a148305-d47f-4e7a-9609-5af39484dfd9.png" alt="Panoramic view of Sambalpur city with Mahanadi river flowing through lush green hills and traditional architecture" class="w-full h-full object-cover" />
+        </div>
+        <div class="hero-content">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">Discover Sambalpur</h1>
+            <p class="text-xl md:text-2xl mb-8">Where Tradition Meets Modernity</p>
+            <button class="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors transform hover:scale-105">
+                Explore Heritage
+            </button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    
+<section id="about" class="section py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 text-purple-800">About Sambalpur</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3877898a-6d20-4e3e-8674-161ee1788d67.png" alt="Aerial view of Sambalpur city showing urban layout with traditional markets and modern buildings alongside the Mahanadi river" class="rounded-lg shadow-xl" />
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">The Cultural Heart of Odisha</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Sambalpur, nestled on the banks of the mighty Mahanadi River, is a vibrant city that beautifully blends rich cultural heritage with modern development. Known as the gateway to western Odisha, it's famous for its unique handloom textiles, particularly the exquisite Sambalpuri sarees.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        The city's history dates back to ancient times, with mentions in various historical texts. Today, it stands as a testament to Odisha's progressive spirit while preserving its traditional roots.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-700">500+ Years</div>
+                            <div class="text-sm text-gray-600">Rich History</div>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-700">1.2 Million</div>
+                            <div class="text-sm text-gray-600">Proud Residents</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Culture Section -->
+    <section id="culture" class="section py-20 bg-purple-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 text-purple-800">Cultural Treasures</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Culture Card 1 -->
+                <div class="culture-card">
+                    <img src="saree1.png" alt="Traditional Sambalpuri handloom weaving process showing intricate patterns and vibrant colors on silk fabric" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Sambalpuri Handloom</h3>
+                        <p class="text-gray-700 mb-4">
+                            World-renowned handloom textiles featuring intricate ikat patterns and vibrant colors, each telling a unique story.
+                        </p>
+                        <button class="text-purple-600 font-semibold did-you-know" data-fact="Sambalpuri sarees can take up to 6 months to complete due to their intricate weaving process!">
+                            Did you know? 🤔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Culture Card 2 -->
+                <div class="culture-card">
+                    <img src="dance.png" alt="Traditional Sambalpuri folk dance performance with dancers in colorful costumes and traditional musical instruments" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Folk Dances</h3>
+                        <p class="text-gray-700 mb-4">
+                            Experience the energetic Dalkhai and other traditional dances that celebrate the region's cultural richness.
+                        </p>
+                        <button class="text-purple-600 font-semibold did-you-know" data-fact="Dalkhai dance is performed during festivals and is accompanied by traditional instruments like dhol and nisan!">
+                            Did you know? 🤔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Culture Card 3 -->
+                <div class="culture-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ee34e741-e919-44d5-82be-93b47dafb70c.png" alt="Traditional Sambalpuri cuisine spread showing local delicacies and seasonal fruits from the region" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Local Cuisine</h3>
+                        <p class="text-gray-700 mb-4">
+                            Savor authentic flavors with dishes like Pakhal, Santula, and various traditional sweets that define Sambalpur's culinary identity.
+                        </p>
+                        <button class="text-purple-600 font-semibold did-you-know" data-fact="Sambalpur is famous for its unique bamboo chicken preparation, cooked inside bamboo stems!">
+                            Did you know? 🤔
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage Section -->
+    <section id="heritage" class="section py-20 relative overflow-hidden bg-gradient-to-r from-purple-100 via-purple-200 to-purple-300">
   
- 
+  <!-- Floating Bubbles Background -->
+  <div class="absolute inset-0 -z-10">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-16 text-purple-800">Heritage Wonders</h2>
+
+    <!-- Heritage Item 1 -->
+    <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+      <div class="relative group flex justify-center">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e1bb40f8-dfbb-4512-a752-73f42f4883aa.png" 
+             alt="Hirakud Dam" 
+             class="w-full max-w-md rounded-2xl shadow-lg transform transition duration-500 group-hover:rotate-2 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-purple-400/60" />
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold mb-4 text-purple-800">🏛️ Hirakud Dam</h3>
+        <p class="text-gray-700 leading-relaxed">
+          One of the world's longest earthen dams, offering breathtaking views and playing a crucial role in irrigation and power generation.
+        </p>
+      </div>
+    </div>
+
+    <!-- Heritage Item 2 -->
+    <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+      <div>
+        <h3 class="text-2xl font-semibold mb-4 text-purple-800">🕌 Samaleswari Temple</h3>
+        <p class="text-gray-700 leading-relaxed">
+          The revered temple dedicated to Goddess Samaleswari, the presiding deity of Sambalpur, is a sacred pilgrimage site with deep spiritual importance.
+        </p>
+      </div>
+      <div class="relative group flex justify-center">
+        <img src="samtemp1.jpg" alt="Samaleswari Temple" 
+             class="w-full max-w-md rounded-2xl shadow-lg transform transition duration-500 group-hover:-rotate-2 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-purple-400/60" />
+      </div>
+    </div>
+
+    <!-- Heritage Item 3 -->
+    <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+      <div class="relative group flex justify-center">
+        <img src="huma1.jpg" alt="Huma Mandir" 
+             class="w-full max-w-md rounded-2xl shadow-lg transform transition duration-500 group-hover:rotate-2 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-purple-400/60" />
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold mb-4 text-purple-800">🏺 Huma Mandir</h3>
+        <p class="text-gray-700 leading-relaxed">
+          The Leaning Temple of Huma, dedicated to Lord Bimaleshwar, is one of the very few leaning temples in the world, uniquely perched on the banks of the Mahanadi River.
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
 
-    <section id="about" class="section">
-      <h2>About Sambalpur</h2>
-      <p>Sambalpur is a vibrant city in Odisha, nestled on the banks of the Mahanadi River 🌊. It’s the fifth-largest city in the state and gets its name from the revered Goddess Samaleswari 🙏. Founded in 1528 by Raja Balaram Dev, the city blends tradition with progress 🏛️🛤️.
-
-</p>
-      
+    <!-- Gallery Section -->
+    <section id="gallery" class="section py-20 bg-purple-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 text-purple-800">Cultural Gallery</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">  
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e8850d6-2b1e-48ee-846b-3281d77ae9f8.png" alt="Colorful Sambalpuri sarees displayed in traditional market with intricate patterns visible" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/146c1bed-895a-4585-abca-3671d308a1eb.png" alt="Traditional folk artists performing Dalkhai dance in colorful costumes with musical instruments" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ca453d57-cff4-4a6d-9d1b-6df86219ce2d.png" alt="Ancient Samaleswari Temple architecture with detailed carvings and religious ceremonies" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a181549b-3549-4ceb-9113-801d2003c283.png" alt="Local artisan demonstrating traditional handloom weaving techniques on wooden loom" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e9737167-911f-4666-b7d1-8f96e870bed2.png" alt="Traditional Sambalpuri cuisine spread with local dishes and ingredients" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/391cf959-a77e-493e-b832-ca564565f4ab.png" alt="Scenic view of Mahanadi river flowing through Sambalpur with sunset backdrop" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bc549b72-7501-4028-ad6f-dd0a07d04858.png" alt="Colorful local market scene with traditional crafts and textiles in Sambalpur" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/87514ac3-3965-4f5f-a9a2-973b92d6baee.png" alt="Traditional musical instruments used in Sambalpuri folk music performances" class="rounded-lg shadow-md hover:scale-105 transition-transform" />
+        </div>
     </section>
 
-    <section id="history" class="section scrollable">
-  <h2>Temples & History</h2>
+    <!-- Footer -->
+    <footer class="bg-purple-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Sambalpur Heritage</h3>
+                    <p class="text-purple-200">
+                        Preserving and promoting the rich cultural heritage of Sambalpur for future generations.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-purple-200 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-purple-200 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#culture" class="text-purple-200 hover:text-white transition-colors">Culture</a></li>
+                        <li><a href="#heritage" class="text-purple-200 hover:text-white transition-colors">Heritage</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl text-purple-200 hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl text-purple-200 hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl text-purple-200 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl text-purple-200 hover:text-white transition-colors"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-purple-700 mt-8 pt-8 text-center">
+                <p class="text-purple-200">© 2024 Sambalpur Heritage. Created with ❤️ by Bidisha Priyadarsini</p>
+            </div>
+        </div>
+    </footer>
 
-  <div class="temple">
-    <h3>Samaleswari Temple</h3>
-    <div class="temple-gallery">
-      <img src="samtemp1.jpg" alt="Samaleswari Temple 1" />
-      <img src="samtemp2.jpg" alt="Samaleswari Temple 2" />
-      <img src="samtemp3.jpg" alt="Samaleswari Temple 3" />
+    <!-- Popup Modal -->
+    <div class="popup" id="factPopup">
+        <div class="text-4xl mb-4">💡</div>
+        <h3 class="text-xl font-semibold mb-4">Did You Know?</h3>
+        <p id="factContent" class="text-gray-700 mb-6"></p>
+        <button class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors" onclick="closePopup()">
+            Amazing!
+        </button>
     </div>
-    <p>Dedicated to Goddess Samaleswari, this temple is an important religious site and the presiding deity of Sambalpur.Located on the serene banks of the Mahanadi River in Sambalpur, Samaleswari Temple is one of Odisha’s most revered spiritual landmarks. Dedicated to Goddess Samaleswari, the presiding deity of western Odisha, the temple dates back to the 16th century, built by King Balaram Dev. Known for its distinct Sandhara architecture, the shrine houses a granite idol adorned with traditional gold ornaments and holds deep cultural and religious significance. The temple is the focal point of major regional festivals like Nuakhai (the harvest celebration) and Navaratri, attracting thousands of devotees annually. Currently undergoing a ₹200 crore transformation under the SAMALEI project, the temple complex is evolving into a modern spiritual and cultural hub with amenities like a parikrama path, museum, and riverfront development—making it a must-visit for both pilgrims and tourists.
-  <div class="temple">
-    <h3>Huma Temple</h3>
-    <div class="temple-gallery">
-      <img src="huma1.jpg" alt="Huma Temple 1" />
-      <img src="huma2.jpg" alt="Huma Temple 2" />
-      <img src="huma3.jpg" alt="Huma Temple 3" />
-    </div>
-    <p>The Leaning Temple of Huma, located 23 km from Sambalpur on the banks of the Mahanadi River, is a rare architectural wonder dedicated to Lord Shiva. Built in the 17th century by King Baliar Singh, the temple is famous for its tilted structure, with the main shrine and surrounding buildings leaning at unique angles. Despite the tilt, the temple remains structurally stable and continues to attract devotees and tourists. Every year during Mahashivratri, thousands gather for the grand fair. The nearby river is home to sacred “Kudo” fish, which are revered and fed by visitors.
 
-</p>
-  </div>
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animation for sections
+        function checkScroll() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight - 100) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Popup functionality
+        const popup = document.getElementById('factPopup');
+        const factContent = document.getElementById('factContent');
+
+        document.querySelectorAll('.did-you-know').forEach(button => {
+            button.addEventListener('click', function() {
+                factContent.textContent = this.getAttribute('data-fact');
+                popup.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closePopup() {
+            popup.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close popup when clicking outside
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle (simplified)
+        document.querySelector('.md\\:hidden button').addEventListener('click', function() {
+            alert('Mobile menu would open here!');
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.culture-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+const heritage = document.getElementById("heritage");
+
+function createBubble() {
+  const bubble = document.createElement("div");
+  bubble.classList.add("bubble");
+
+  // random size
+  const size = Math.random() * 30 + 10; // 10px – 40px
+  bubble.style.width = `${size}px`;
+  bubble.style.height = `${size}px`;
+
+  // random start position
+  bubble.style.top = `${Math.random() * 100}%`;
+  bubble.style.left = `${Math.random() * 100}%`;
+
+  // random movement direction
+  bubble.style.setProperty("--x-move", `${(Math.random() - 0.5) * 200}px`);
+  bubble.style.setProperty("--y-move", `${(Math.random() - 1) * 300}px`);
+
+  // random speed
+  const duration = Math.random() * 5 + 4; // 4s – 9s
+  bubble.style.animationDuration = `${duration}s`;
+
+  // random color
+  const colors = [
+    "rgba(255, 99, 132, 0.6)",   // pink/red
+    "rgba(54, 162, 235, 0.6)",   // blue
+    "rgba(255, 206, 86, 0.6)",   // yellow
+    "rgba(75, 192, 192, 0.6)",   // teal
+    "rgba(153, 102, 255, 0.6)",  // purple
+    "rgba(255, 159, 64, 0.6)"    // orange
+  ];
+  bubble.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+  heritage.appendChild(bubble);
+
+  // remove bubble after animation ends
+  setTimeout(() => {
+    bubble.remove();
+  }, duration * 1000);
+}
+
+// 🔥 keep spawning bubbles every 0.3 seconds
+setInterval(createBubble, 300);
+
+// Transparent bubbles everywhere except heritage
+function createTransparentBubble() {
+  const bubble = document.createElement("div");
+  bubble.classList.add("bubble-transparent");
+
+  // random size
+  const size = Math.random() * 40 + 15; 
+  bubble.style.width = `${size}px`;
+  bubble.style.height = `${size}px`;
+
+  // random start position (anywhere in viewport)
+  bubble.style.top = `${Math.random() * 100}vh`;
+  bubble.style.left = `${Math.random() * 100}vw`;
+
+  // random movement
+  bubble.style.setProperty("--x-move", `${(Math.random() - 0.5) * 200}px`);
+  bubble.style.setProperty("--y-move", `${(Math.random() - 0.5) * 200}px`);
+
+  // random speed
+  const duration = Math.random() * 5 + 6;
+  bubble.style.animationDuration = `${duration}s`;
+
+  // add to body
+  document.body.appendChild(bubble);
+
+  // remove after animation
+  setTimeout(() => bubble.remove(), duration * 1000);
+}
+
+// keep spawning transparent bubbles
+setInterval(createTransparentBubble, 250);
+</script>
 
 
-</p>
-  </div>
-</section>
 
-    <section id="culture" class="section">
-      <h2>Culture & Cuisine</h2>
-      <h3>Historical Significance</h3>
-  <p>
-    Sambalpur has a glorious past dating back to ancient times. It finds mention in the works of Ptolemy and Chinese traveler Xuanzang. The region played a key role in India's freedom movement under the leadership of Veer Surendra Sai.
-  </p>
-
-  <h3>Sambalpuri Handloom</h3>
-  <p>
-    The world-famous Sambalpuri sarees represent Odisha's artistic excellence. The unique ikat weaving technique and traditional motifs like shankha (conch), chakra (wheel), and phula (flower) symbolize the region’s cultural depth.
-     <div class="Handloom-gallery">
-      <img src="saree1.png" alt="saree" />
-      <img src="saree2.png" alt="saree" />
-      <img src="saree3.png" alt="saree" />
-    </div>
-  </p>
-
-  <h3>Folk Culture and Dance</h3>
-  <p>
-    The cultural landscape of Sambalpur thrives through vibrant folk dances like Dalkhai, Karma, and Rasarkeli. Traditional instruments such as the dhol and mahuri accompany these performances, especially during local festivals.
-    <div class="Folk-gallery">
-      <img src="dance.png" alt="dance" />
-      <img src="dance2.png" alt="dance" />
-      <img src="dance3.png" alt="dance" />
-    </div>   
-</p>
-
-
-  <h3>Festivals</h3>
-  <p>
-    The most celebrated festival is <strong>Nuakhai & Sheetal Sasthi</strong>, marking the first harvest of the year. Nuakhai reflects the deep agrarian roots and the community’s connection with nature and tradition whereas Sheetal sasthi celebrates the divine day of Lord Shiva and Maa Parvati's Marriage.
- <div class="festival">
-      <img src="fest.png" alt="dance" />
-      <img src="fest2.png" alt="dance" />
-    </div>   
-</p>
-
-  <h3>Tribal Legacy</h3>
-  <p>
-    The region is home to various tribal communities such as the Gond and Kandha, whose customs, beliefs, and lifestyles add to the richness of Sambalpur’s heritage.
-    <div class="tribe">
-      <img src="tribe.png" alt="dance" />
-      <img src="tribe2.png" alt="dance" />
-      <img src="tribe3.png" alt="dance" />
-    </div>   
-</p>
-      <ul>
-        <li>Sambalpuri Sarees</li>
-        <li>Rasabara, Chhenapoda, and other traditional dishes</li>
-        <li>Folk dances like Dalkhai and Karma</li>
-      </ul>
-    </section>
-  </div>
-
-  <script src="script.js"></script>
+    
 </body>
 </html>
+
+
+
 
